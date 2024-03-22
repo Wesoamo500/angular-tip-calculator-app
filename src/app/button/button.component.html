@@ -1,0 +1,3 @@
+<input (change)="onChange($event)"  [disabled]="isZero" [type]="isInput && isLast?'number':'button'"
+    [value]="isInput && isLast?'':value" [class]="isInput && isLast?'text-right font-bold':''"
+    class="max-w-20 w-[76px] h-9 text-[20px] cursor-pointer disabled:cursor-not-allowed">

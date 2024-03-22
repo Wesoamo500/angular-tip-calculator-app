@@ -1,0 +1,28 @@
+<div class="flex md:items-center justify-center flex-col border h-screen gap-10">
+  <img src="../assets/images/logo.svg" alt="" class="w-[28%] mx-auto md:w-[10%] md:mx-0">
+  <form [formGroup]="tipsForm" class="flex items-center p-5 bg-white rounded-lg gap-10 flex-col md:flex-row">
+    <div class="flex flex-col gap-5">
+      <app-input  src='../assets/images/icon-dollar.svg' label='Bill' id='bill' type='number'
+       [control]="getControl('bill')"  alt='dollar'></app-input>
+      <div class="flex flex-col gap-0.5">
+        <div class="text-[#576d70] text-sm font-extrabold">Select Tip %</div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+          @for (value of values; track $index) {
+          <app-button [isZero]="isZero()"  [value]="value" [isInput]="toggle" (inputValue)="handleInputChange($event)" (click)="$last ? toggleInput(): evaluate(value)" (keyup.enter)="evaluate(value)" [isLast]="$last" class="rounded-md"
+            [class]="$last?'bg-[#f2f7f8] text-[#576d70] text-center':'bg-[#005555] text-white text-center hover:bg-[#d0e1e5] hover:text-[#005555]'"></app-button>
+          }
+        </div>
+      </div>
+      <div>
+        <p class="absolute right-[10%]  md:left-[39%] text-sm text-red-400" [ngClass]="hidden(tipsForm.value.numberOfPeople!)" >Can't be zero</p>
+        <app-input src='../assets/images/icon-person.svg' [isZero]="isZero()" label='Number of People' id='bill' type='number'
+        [control]="getControl('numberOfPeople')"  alt='people'></app-input>
+      </div>
+    </div>
+    <div class="h-full  p-10 bg-[#005555] rounded-lg grid grid-rows-3">
+      <app-output [price]="tip">Tip Amount</app-output>
+      <app-output [price]="total">Total</app-output>
+      <button type="button" (click)="reset()" class="self-end rounded-md py-1 mt-2 bg-[#d0e1e5] text-[#005555] text-[24px] uppercase">Reset</button>
+    </div>
+  </form>
+</div>
